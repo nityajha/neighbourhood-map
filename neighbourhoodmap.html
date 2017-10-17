@@ -275,10 +275,10 @@
         var highlightedIcon = makeMarkerIcon('FFFF24');
 
         // The following group uses the location array to create an array of markers on initialize.
-        for (var i = 0; i < locations.length; i++) {
+        for (var i = 0; i < locations().length; i++) {
           // Get the position from the location array.
-          var position = locations[i].location;
-          var title = locations[i].title;
+          var position = locations()[i].location;
+          var title = locations()[i].title;
           // Create a marker per location, and put into markers array.
           
           var marker = new google.maps.Marker({
@@ -404,17 +404,17 @@
       function showListings() {
         var bounds = new google.maps.LatLngBounds();
         // Extend the boundaries of the map for each marker and display the marker
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
-          bounds.extend(markers[i].position);
+        for (var i = 0; i < markers().length; i++) {
+          markers()[i].setMap(map);
+          bounds.extend(markers()[i].position);
         }
         map.fitBounds(bounds);
       }
 
       // This function will loop through the listings and hide them all.
-      function hideMarkers(markers) {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
+      function hideMarkers(markers()) {
+        for (var i = 0; i < markers().length; i++) {
+          markers()[i].setMap(null);
         }
       }
 
@@ -449,11 +449,11 @@
       // and shows only the ones within it. This is so that the
       // user can specify an exact area of search.
       function searchWithinPolygon() {
-        for (var i = 0; i < markers.length; i++) {
-          if (google.maps.geometry.poly.containsLocation(markers[i].position, polygon)) {
-            markers[i].setMap(map);
+        for (var i = 0; i < markers().length; i++) {
+          if (google.maps.geometry.poly.containsLocation(markers()[i].position, polygon)) {
+            markers()[i].setMap(map);
           } else {
-            markers[i].setMap(null);
+            markers()[i].setMap(null);
           }
         }
       }
@@ -498,13 +498,13 @@
         if (address == '') {
           window.alert('You must enter an address.');
         } else {
-          hideMarkers(markers);
+          hideMarkers(markers());
           // Use the distance matrix service to calculate the duration of the
           // routes between all our markers, and the destination address entered
           // by the user. Then put all the origins into an origin matrix.
           var origins = [];
-          for (var i = 0; i < markers.length; i++) {
-            origins[i] = markers[i].position;
+          for (var i = 0; i < markers().length; i++) {
+            origins[i] = markers()[i].position;
           }
           var destination = address;
           var mode = document.getElementById('mode').value;
@@ -549,8 +549,8 @@
               var duration = element.duration.value / 60;
               var durationText = element.duration.text;
               if (duration <= maxDuration) {
-                //the origin [i] should = the markers[i]
-                markers[i].setMap(map);
+                //the origin [i] should = the markers()[i]
+                markers()[i].setMap(map);
                 atLeastOne = true;
                 // Create a mini infowindow to open immediately and contain the
                 // distance and duration
@@ -562,8 +562,8 @@
                 infowindow.open(map, markers[i]);
                 // Put this in so that this small window closes if the user clicks
                 // the marker, when the big infowindow opens
-                markers[i].infowindow = infowindow;
-                google.maps.event.addListener(markers[i], 'click', function() {
+                markers()[i].infowindow = infowindow;
+                google.maps.event.addListener(markers()[i], 'click', function() {
                   this.infowindow.close();
                 });
               }
@@ -579,7 +579,7 @@
       // of the markers within the calculated distance. This will display the route
       // on the map.
       function displayDirections(origin) {
-        hideMarkers(markers);
+        hideMarkers(markers());
         var directionsService = new google.maps.DirectionsService;
         // Get the destination address from the user entered value.
         var destinationAddress =
@@ -625,7 +625,7 @@
       // It will do a nearby search using the entered query string or place.
       function textSearchPlaces() {
         var bounds = map.getBounds();
-        hideMarkers(placeMarkers);
+        hideMarkers(placeMarkers());
         var placesService = new google.maps.places.PlacesService(map);
         placesService.textSearch({
           query: document.getElementById('places-search').value,
