@@ -151,9 +151,7 @@ var infowindow;
           markers.push(marker);
           // Create an onclick event to open the large infowindow at each marker.
           marker.addListener('click', populateInfoWindow);
-					var populateInfoWindow = function() {
-            var marker = this;};
-
+					
           // Two event listeners - one for mouseover, one for mouseout,
           // to change the colors back and forth.
           marker.addListener('mouseover', function() {
