@@ -1,4 +1,5 @@
 var map;
+var infowindow;
 
       // Create a new blank array for all the listing markers.
       var markers = ko.observableArray();
@@ -111,7 +112,7 @@ var map;
 	{title: 'India Gate', location: {lat: 28.612912, lng: 77.2295097}},
 	{title: 'Jantar Mantar', location: {lat: 28.6270547, lng: 77.2166267}}
          ]);
-        var largeInfowindow = new google.maps.InfoWindow();
+        infowindow = new google.maps.InfoWindow();
 
         // Initialize the drawing manager.
         var drawingManager = new google.maps.drawing.DrawingManager({
@@ -149,9 +150,10 @@ var map;
           // Push the marker to our array of markers.
           markers.push(marker);
           // Create an onclick event to open the large infowindow at each marker.
-          marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfowindow);
-          });
+          marker.addListener('click', populateInfoWindow);
+					var populateInfoWindow = function() {
+            var marker = this;};
+
           // Two event listeners - one for mouseover, one for mouseout,
           // to change the colors back and forth.
           marker.addListener('mouseover', function() {
