@@ -216,7 +216,7 @@ var infowindow;
       // one infowindow which will open at the marker that is clicked, and populate based
       // on that markers position.
       function populateInfoWindow() {
-        var marker = this;}
+        var marker = this;
         var streetViewService = new google.maps.StreetViewService();
         var radius = 50;
           // In case the status is OK, which means the pano was found, compute the
@@ -248,7 +248,7 @@ var infowindow;
           // Open the infowindow on the correct marker.
           infowindow.open(map, marker);
         }
-      }
+      
 
       // This function will loop through the markers array and display them all.
       function showListings() {
