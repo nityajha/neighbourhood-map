@@ -1,7 +1,7 @@
 var map;
 var infowindow;
 function handleMouseOver(event){ 
-  this.setIcon(highlightedIcon); 
+  event.target.setIcon(highlightedIcon); 
 }
 
       // Create a new blank array for all the listing markers.
