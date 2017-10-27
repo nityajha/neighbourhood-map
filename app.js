@@ -1,8 +1,5 @@
 var map;
 var infowindow;
-function handleMouseOver(event){ 
-  event.target.setIcon(highlightedIcon); 
-}
 
       // Create a new blank array for all the listing markers.
       var markers = ko.observableArray();
@@ -157,8 +154,12 @@ function handleMouseOver(event){
 					
           // Two event listeners - one for mouseover, one for mouseout,
           // to change the colors back and forth.
-          marker.addListener('mouseover',handleMouseOver);
-          marker.addListener('mouseout', defaultIcon);
+          marker.addListener('mouseover', function() {
+            this.setIcon(highlightedIcon);
+          });
+          marker.addListener('mouseout', function() {
+            this.setIcon(defaultIcon);
+          });
         }
         document.getElementById('show-listings').addEventListener('click', showListings);
 
@@ -573,3 +574,4 @@ function handleMouseOver(event){
         }
       });
     }
+
