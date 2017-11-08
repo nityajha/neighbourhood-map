@@ -228,7 +228,15 @@ function populateInfoWindow(marker, infowindow) {
           		// In case the status is OK, which means the pano was found, compute the
           		// position of the streetview image, then calculate the heading, then get a
           		// panorama from that and set the options
-          		function getStreetView(data, status) {
+          		
+		// Use streetview service to get the closest streetview image within
+		// 50 meters of the markers position
+		streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+		// Open the infowindow on the correct marker.
+		infowindow.open(map, marker);
+	}
+}
+function getStreetView(infowindow) {
 			if (status == google.maps.StreetViewStatus.OK) {
 				var nearStreetViewLocation = data.location.latLng;
               				var heading = google.maps.geometry.spherical.computeHeading(
@@ -248,13 +256,6 @@ function populateInfoWindow(marker, infowindow) {
 				'<div>No Street View Found</div>');
 			}
 		}
-		// Use streetview service to get the closest streetview image within
-		// 50 meters of the markers position
-		streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-		// Open the infowindow on the correct marker.
-		infowindow.open(map, marker);
-	}
-}
 
 
 // This function will loop through the markers array and display them all.
@@ -324,14 +325,14 @@ function zoomToArea() {
 	// Get the address or place that the user entered.
 	var address = document.getElementById('zoom-to-area-text').value;
 	// Make sure the address isn't blank.
-	if (address == '') {
+	if (address.length === 0) {
 		window.alert('You must enter an area, or address.');
 	} else {
 		// Geocode the address/area entered to get the center. Then, center the map
 		// on it and zoom in
 		geocoder.geocode(
         			{ address: address,
-              			componentRestrictions: {locality: 'New York'}
+              			componentRestrictions: {locality: 'New Delhi'}
             		}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				map.setCenter(results[0].geometry.location);
@@ -352,7 +353,7 @@ function searchWithinTime() {
 	var distanceMatrixService = new google.maps.DistanceMatrixService();
 	var address = document.getElementById('search-within-time-text').value;
 	// Check to make sure the place entered isn't blank.
-	if (address == '') {
+	if (address.length === 0) {
 		window.alert('You must enter an address.');
 	} else {
 		hideMarkers(markers);
@@ -437,7 +438,7 @@ function displayMarkersWithinTime(response) {
 // on the map.
 function displayDirections(origin) {
 	hideMarkers(markers);
-	var directionsService = new google.maps.DirectionsService;
+	var directionsService = new google.maps.DirectionsService();
 	// Get the destination address from the user entered value.
 	var destinationAddress =
             		document.getElementById('search-within-time-text').value;
