@@ -470,7 +470,7 @@ function displayDirections(origin) {
 function searchBoxPlaces(searchBox) {
 	hideMarkers(placeMarkers);
 	var places = searchBox.getPlaces();
-	if (places.length == 0) {
+	if (places.length === 0) {
 		window.alert('We did not find any places matching that search!');
 	} else {
 		// For each place, get the icon, name and location.
