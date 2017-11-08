@@ -228,7 +228,7 @@ function populateInfoWindow(marker, infowindow) {
           		// In case the status is OK, which means the pano was found, compute the
           		// position of the streetview image, then calculate the heading, then get a
           		// panorama from that and set the options
-          		
+          		getStreetView(infowindow);
 		// Use streetview service to get the closest streetview image within
 		// 50 meters of the markers position
 		streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
