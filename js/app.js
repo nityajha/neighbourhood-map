@@ -1,4 +1,5 @@
 var map;
+var infowindow;
 // Create a new blank array for all the listing markers.
 var markers = [];
 // This global polygon variable is to ensure only ONE polygon is rendered.
@@ -132,8 +133,8 @@ function initMap() {
 	// The following group uses the location array to create an array of markers on initialize.
 	locations.forEach (function(d,i){
 		// Get the position from the location array.
-		var position = locations()[i].location;
-		var title = locations()[i].title;
+		var position = locations[i].location;
+		var title = locations[i].title;
 		// Create a marker per location, and put into markers array.
 		var marker = new google.maps.Marker({
 			position: position,
@@ -213,10 +214,9 @@ function initMap() {
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
 // on that markers position.
-function populateInfoWindow(infoWindow) {
+function populateInfoWindow(infowindow, marker) {
 	
 	console.log("beginning");
-	var marker = this;
 	
 	var streetViewService = new google.maps.StreetViewService();
 	
@@ -281,8 +281,6 @@ function populateInfoWindow(infoWindow) {
 
 	console.log("end");
 }
-
-
 
 
 
@@ -518,7 +516,12 @@ function textSearchPlaces() {
 		bounds: bounds
 		}, function(results, status) {
 		if (status === google.maps.places.PlacesServiceStatus.OK) {
-			createMarkersForPlaces(results);
+			if (places.length === 0) {
+				window.alert('We did not find any places matching that search!');
+			} else {
+				// For each place, get the icon, name and location.
+				createMarkersForPlaces(results );
+			}
 		}
 	});
 }
