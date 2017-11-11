@@ -147,7 +147,7 @@ function initMap() {
 		markers.push(marker);
 		// Create an onclick event to open the large infowindow at each marker.
 		marker.addListener('click', function() {
-			populateInfoWindow(this, largeInfowindow);
+			populateInfoWindow(marker, largeInfowindow);
 		});
 		// Two event listeners - one for mouseover, one for mouseout,
 		// to change the colors back and forth.
