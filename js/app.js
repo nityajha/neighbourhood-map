@@ -100,14 +100,14 @@ function initMap() {
 
 	// These are the tourist location listings that will be shown to the user.
 	// Normally we'd have these in a database instead.
-	var locations = [
+	var locations = ko.observableArray([
           		{title: 'Red Fort', location: {lat: 28.6561592, lng: 77.2410203}},
 		{title: 'Lotus Temple', location: {lat: 28.553492, lng: 77.2588264}},
 		{title: 'Rashtrapati Bhawan', location: {lat: 28.6141527, lng: 77.19596219999994}},
 		{title: 'Qutub Minar', location: {lat: 28.5244281, lng: 77.18545589999997}},
 		{title: 'India Gate', location: {lat: 28.612912, lng: 77.2295097}},
 		{title: 'Jantar Mantar', location: {lat: 28.6270547, lng: 77.2166267}}
-	        ];
+	        ]);
 
 	var largeInfowindow = new google.maps.InfoWindow();
 
@@ -214,8 +214,7 @@ function initMap() {
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
 // on that markers position.
-function populateInfoWindow(marker, infowindow) {
-	
+function populateInfoWindow(marker, infowindow) {	
 	console.log("beginning");
 	
 	var streetViewService = new google.maps.StreetViewService();
