@@ -106,6 +106,13 @@ function initMap() {
 		{title: 'Rashtrapati Bhawan', location: {lat: 28.6141527, lng: 77.19596219999994}},
 		{title: 'Qutub Minar', location: {lat: 28.5244281, lng: 77.18545589999997}},
 		{title: 'India Gate', location: {lat: 28.612912, lng: 77.2295097}},
+		{title: 'Worlds of Wonder', location: {lat: 28.5638068, lng: 77.32605979999994}},
+		{title: 'National Rail Museum', location: {lat: 28.5854992, lng: 77.1800892}},
+		{title: 'University of Delhi', location: {lat: 28.5842523, lng: 77.16382820000001}},
+		{title: 'Tughlakabad Fort', location: {lat: 28.5163996, lng: 77.26134879999995}},
+		{title: 'The Garden of Five Senses', location: {lat: 28.513307, lng: 77.19850309999993}},
+		{title: 'Tomb of Humayun', location: {lat: 28.5932818, lng: 77.2507488}},
+		{title: 'Hazrat Nizamuddin Aulia Dargah', location: {lat: 28.5913871, lng: 77.24186429999997}},
 		{title: 'Jantar Mantar', location: {lat: 28.6270547, lng: 77.2166267}}
 	        ]);
 
@@ -133,8 +140,8 @@ function initMap() {
 	// The following group uses the location array to create an array of markers on initialize.
 	locations().forEach (function(d,i){
 		// Get the position from the location array.
-		var position = locations[i].location;
-		var title = locations[i].title;
+		var position = locations()[i].location;
+		var title = locations()[i].title;
 		// Create a marker per location, and put into markers array.
 		var marker = new google.maps.Marker({
 			position: position,
