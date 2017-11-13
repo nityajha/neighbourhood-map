@@ -131,7 +131,7 @@ function initMap() {
 	var highlightedIcon = makeMarkerIcon('FFFF24');
 
 	// The following group uses the location array to create an array of markers on initialize.
-	locations.forEach (function(d,i){
+	locations().forEach (function(d,i){
 		// Get the position from the location array.
 		var position = locations[i].location;
 		var title = locations[i].title;
